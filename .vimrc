@@ -109,6 +109,9 @@ set wildignore=*.swp,*.bak,*.pyc,*.class
 " When vimrc is edited, reload it
 autocmd! bufwritepost vimrc source ~/.vimrc
 
+" Compartir clipboard con el sistema
+set clipboard=unnamedplus
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
