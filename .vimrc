@@ -56,21 +56,19 @@ Bundle 'airblade/vim-gitgutter'
 " Best view with a 256 color terminal and Powerline fonts
 Bundle 'flazz/vim-colorschemes'
 
-
 " Mejora la lectura de js
 Bundle 'jelera/vim-javascript-syntax'
-
 
 "PAra comentarios
 Bundle 'scrooloose/nerdcommenter'
 
-
 "Emmet is plugin which greatly improves HTML & CSS workflow
 Plugin 'mattn/emmet-vim'
 
+" Vim css and less syntax
+Bundle 'groenewege/vim-less'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 
 syntax on                           " syntax highlighing
 
@@ -133,8 +131,6 @@ set showmatch "Show matching bracets when text indicator is over them
 set noerrorbells
 set novisualbell
 set tm=500
-
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Files, backups and undo
@@ -226,8 +222,6 @@ aug QFClose
   au WinEnter * if winnr('$') == 1 && getbufvar(winbufnr(winnr()), "&buftype") == "quickfix"|q|endif
 aug END
 
-
-
 """"""""""""""""""""""""""""""""""""""""""""""""
 " Auto close preview menu autocomplete after choose
 " http://stackoverflow.com/questions/3105307/how-do-you-automatically-remove-the-preview-window-after-autocompletion-in-vim
@@ -248,7 +242,6 @@ nnoremap <F8> :TagbarToggle<CR>
 let g:tagbar_usearrows=1
 let g:tagbar_width=30
 let g:tagbar_singleclick=1
-
 
 
 """"""""""""""""""""""""""""""""""""""""""""
@@ -285,8 +278,6 @@ function! s:CloseIfOnlyNerdTreeLeft()
     endif
   endif
 endfunction
-
-
 
 " Minibuffer{{{
 """"""""""""""""""""""""""""""
@@ -360,7 +351,7 @@ endif
 " ]]            Jump on next class or function (normal, visual, operator modes)
 " [M            Jump on previous class or method (normal, visual, operator modes)
 " ]M            Jump on next class or method (normal, visual, operator modes)
-let g:pymode_rope = 0
+let g:pymode_rope = 0 "Disable rope because use jedi-vim
 
 " Documentation
 let g:pymode_doc = 1
@@ -382,28 +373,15 @@ let g:pymode_breakpoint_key = '<leader>b'
 " syntax highlighting
 let g:pymode_syntax = 1
 let g:pymode_syntax_all = 1
-"let g:pymode_syntax_indent_errors = g:pymode_syntax_all
-"let g:pymode_syntax_space_errors = g:pymode_syntax_all
-"let g:pymode_syntax_highlight_equal_operator = g:pymode_syntax_all
-"let g:pymode_syntax_highlight_self = g:pymode_syntax_all
-"let g:pymode_syntax_builtin_objs = g:pymode_syntax_all
-"let g:pymode_syntax_builtin_types = g:pymode_syntax_all
-"let g:pymode_syntax_docstrings = g:pymode_syntax_all
+
 
 " Options
 let g:pymode_options_max_line_length = 79 "Maximo de caracteres por linea
 let g:pymode_options_colorcolumn = 1 " Enable colorcolum display at max_line_lenght
 let g:pymode_python = 'python3' "Version python two opt 'python' or 'python3'
 
-
-"let g:pymode_rope_goto_definition_bind = '<C-c>g' "Go definition method or class
-"let g:pymode_rope_goto_definition_cmd = 'new' "Command for open window when definition has been found
-
-
 " Don't autofold code
 let g:pymode_folding = 0
-
-
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -437,3 +415,9 @@ autocmd FileType html,css EmmetInstall
 
 "To remap the default <C-Y> leader:
 let g:user_emmet_leader_key= '<C-Z>'
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => vim-less Plugins
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nnoremap <Leader>m :w <BAR> !lessc % > %:t:r.css<CR><space>
