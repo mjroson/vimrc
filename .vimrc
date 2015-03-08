@@ -3,14 +3,14 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set nocompatible
 
-set rtp+=~/.vim/bundle/vundle/
+set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#rc()
 
 filetype off                   " required!
 
 " let Vundle manage Vundle
 " required! 
-Bundle 'gmarik/vundle'
+Bundle 'gmarik/Vundle.vim'
 
 " Tagbar is a Vim plugin that provides an easy way to browse the tags of the current file and get an overview of its structure
 Bundle 'majutsushi/tagbar'
@@ -82,14 +82,13 @@ filetype plugin indent on
 " => color-scheme
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-"color Monokai
-:colorscheme molokai
-" color codeschool
+color Monokai
+color hybrid
 "set guifont=Monaco:h12
 set guioptions-=T " Removes top toolbar
 set guioptions-=r " Removes right hand scroll bar
 set go-=L " Removes left hand scroll bar
-autocmd User Rails let b:surround_{char2nr('-')} = "<% \r %>" " displays <% %> correctly
+"autocmd User Rails let b:surround_{char2nr('-')} = "<% \r %>" " displays <% %> correctly
 :set cpoptions+=$ " puts a $ marker for the end of words/lines in cw/c$ commands
 
 
@@ -104,13 +103,20 @@ set history=1000
 set wildignore=*.swp,*.bak,*.pyc,*.class
 
 " Set to auto read when a file is changed from the outside
-" set autowrite
+set autowrite
+
+" With a map leader it's possible to do extra key combinations
+" leader is press comma (,) key
+" like <leader>w saves the current file
+let mapleader=","
+"let g:mapleader=","
 
 " When vimrc is edited, reload it
 autocmd! bufwritepost vimrc source ~/.vimrc
 
 " Compartir clipboard con el sistema
 set clipboard=unnamedplus
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
@@ -414,7 +420,7 @@ let g:user_emmet_mode='a'
 
 "Enable just for html/css
 let g:user_emmet_install_global = 0
-autocmd FileType html,css EmmetInstall
+autocmd FileType html,htmldjango,css EmmetInstall
 
 "To remap the default <C-Y> leader:
 let g:user_emmet_leader_key= '<C-Z>'
@@ -424,3 +430,4 @@ let g:user_emmet_leader_key= '<C-Z>'
 " => vim-less Plugins
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nnoremap <Leader>m :w <BAR> !lessc % > %:t:r.css<CR><space>
+
