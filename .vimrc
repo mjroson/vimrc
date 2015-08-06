@@ -3,7 +3,7 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set nocompatible
 
-set rtp+=~/.vim/bundle/Vundle.vim
+set rtp+=~/.my_vimrc/.vim/bundle/Vundle.vim
 call vundle#rc()
 
 filetype off                   " required!
