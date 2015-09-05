@@ -1,19 +1,16 @@
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Vundle Config
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set nocompatible
-
-set rtp+=~/.my_vimrc/.vim/bundle/Vundle.vim
-call vundle#rc()
-
+set nocompatible " be iMproved, required
 filetype off                   " required!
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
 
 " let Vundle manage Vundle
 " required! 
 Bundle 'gmarik/Vundle.vim'
-
-" Tagbar is a Vim plugin that provides an easy way to browse the tags of the current file and get an overview of its structure
-Bundle 'majutsushi/tagbar'
 
 "l9 is a Vim-script library, which provides some utility functions and commands for programming in Vim. 
 Bundle 'L9'
@@ -26,35 +23,45 @@ Bundle 'FuzzyFinder'
 " The Most Recently Used (MRU) plugin provides an easy access to a list of recently opened/edited files in Vim
 Bundle 'vim-scripts/mru.vim'
 
-" The NERD tree allows you to explore your filesystem and to open files and directories. 
-Bundle 'scrooloose/nerdtree'
-Bundle 'jistr/vim-nerdtree-tabs'
 
 " plugin will modify python's sys.path and the $PATH environment (Folder default search ~/.virtualenvs/)
 Bundle 'jmcantrell/vim-virtualenv'
 
-" plugin that helps you to create python code very quickly by utilizing libraries including pylint, rope, 
-" pydoc, pyflakes, pep8, and mccabe for features like static analysis, refactoring, folding, completion, documentation, and more.
-Bundle 'klen/python-mode'
 
 " jedi-vim is a VIM binding to the autocompletion library Jedi.
 " doc http://jedi.jedidjah.ch/en/latest/
 Bundle 'davidhalter/jedi-vim'
 
+" plugin that runs the currently open file through Flake8, a static syntax and style checker for Python source code. It supersedes both vim-pyflakes and vim-pep8.
+" Flake8 is a wrapper around PyFlakes (static syntax checker), PEP8 (style checker) and Ned's MacCabe script (complexity checker).
+Bundle 'nview/vim-flake8'
+
+
 " fugitive.vim may very well be the best Git wrapper of all time
 Bundle 'tpope/vim-fugitive'
-
-" Lean & mean status/tabline for vim that's light as air.
-Bundle 'bling/vim-airline'
 
 " A Vim plugin which shows a git diff in the 'gutter' (sign column). It shows whether each line has been added, 
 " modified, and where lines have been removed. You can also stage and revert individual hunks.
 Bundle 'airblade/vim-gitgutter'
 
+
+" The NERD tree allows you to explore your filesystem and to open files and directories. 
+Bundle 'scrooloose/nerdtree'
+Bundle 'jistr/vim-nerdtree-tabs'
+
+" Tagbar is a Vim plugin that provides an easy way to browse the tags of the current file and get an overview of its structure
+Bundle 'majutsushi/tagbar'
+
+
+" Lean & mean status/tabline for vim that's light as air.
+Bundle 'bling/vim-airline'
+
+
 " Color Themes
 " vim-sublime - A minimal Sublime Text -like vim experience bundle http://github.com/grigio/vim-sublime
 " Best view with a 256 color terminal and Powerline fonts
 Bundle 'flazz/vim-colorschemes'
+
 
 " Mejora la lectura de js
 Bundle 'jelera/vim-javascript-syntax'
@@ -70,20 +77,19 @@ Bundle 'groenewege/vim-less'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+
 syntax on                           " syntax highlighing
 
-"
-" Plugins config
-"
-
-filetype plugin indent on
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => color-scheme
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 color Monokai
-color hybrid
 "set guifont=Monaco:h12
 set guioptions-=T " Removes top toolbar
 set guioptions-=r " Removes right hand scroll bar
@@ -94,7 +100,7 @@ set go-=L " Removes left hand scroll bar
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => General
+" => General Configuration
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Sets how many lines of history VIM has to remember
 set history=1000
@@ -117,47 +123,6 @@ autocmd! bufwritepost vimrc source ~/.vimrc
 " Compartir clipboard con el sistema
 set clipboard=unnamedplus
 
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => VIM user interface
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"set so=7            " Set 7 lines to the curors - when moving vertical..
-set ruler           "Always show current position
-set hid             "Change buffer - without saving
-set nohidden
-set mouse=a
-
-" Set backspace config
-set backspace=eol,start,indent
-set whichwrap+=<,>,h,l
-
-set nolazyredraw "Don't redraw while executing macros 
-set magic "Set magic on, for regular expressions
-
-set showmatch "Show matching bracets when text indicator is over them
-
-" No sound on errors
-set noerrorbells
-set novisualbell
-set tm=500
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Files, backups and undo
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Turn backup off, since most stuff is in SVN, git anyway...
-set nobackup
-set nowb
-set noswapfile
-
-set undodir=~/.vim/undodir
-set undofile
-set undolevels=1000 "maximum number of changes that can be undone
-set undoreload=10000 "maximum number lines to save for undo on a buffer reload
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"
-" My CUSTOM 
-"
 set cmdheight=1               " Explicitly set the height of the command line
 set number                    " Display line numbers
 set numberwidth=1             " using only 1 column (and 1 space) while possible
@@ -197,7 +162,47 @@ set t_RV=
 set whichwrap=h,l,~,[,]
 
 
-" markdown
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => VIM user interface
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"set so=7            " Set 7 lines to the curors - when moving vertical..
+set ruler           "Always show current position
+set hid             "Change buffer - without saving
+set nohidden
+set mouse=a
+
+" Set backspace config
+set backspace=eol,start,indent
+set whichwrap+=<,>,h,l
+
+set nolazyredraw "Don't redraw while executing macros 
+set magic "Set magic on, for regular expressions
+
+set showmatch "Show matching bracets when text indicator is over them
+
+" No sound on errors
+set noerrorbells
+set novisualbell
+set tm=500
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Files, backups and undo
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Turn backup off, since most stuff is in SVN, git anyway...
+set nobackup
+set nowb
+set noswapfile
+
+set undodir=~/.vim/undodir
+set undofile
+set undolevels=1000 "maximum number of changes that can be undone
+set undoreload=10000 "maximum number lines to save for undo on a buffer reload
+
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => General
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 au BufEnter,Bufread *.mkd,*.md,*.mdown,*.markdown set tw=0
 
 
@@ -241,10 +246,11 @@ aug END
 autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 
-" CUSTOM CONFIGURATION FOR INSTALLED PLUGIN
-"
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => TagBar 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Use F8 to open Tagbar in Right side
 nnoremap <F8> :TagbarToggle<CR>
 " TagBar Configuration
@@ -252,6 +258,10 @@ let g:tagbar_usearrows=1
 let g:tagbar_width=30
 let g:tagbar_singleclick=1
 
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => NERDTree 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""""""""""""""""
 " NERDTree : https://github.com/scrooloose/nerdtree.git
@@ -288,8 +298,10 @@ function! s:CloseIfOnlyNerdTreeLeft()
   endif
 endfunction
 
-" Minibuffer{{{
-""""""""""""""""""""""""""""""
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Minibuffer 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " make tabs show complete (no broken on two lines)
 let g:miniBufExplTabWrap = 1
@@ -342,55 +354,6 @@ if has("autocmd")
                 \ windo call FixMiniBufExplorerTitle() |
                 \ exec oldwinnr . " wincmd w"
 endif
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""}}}
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Python-mode Plugins
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Activate rope
-" Keys:
-" K             Show python docs
-" <Ctrl-Space>  Rope autocomplete
-" <Ctrl-c>g     Rope goto definition
-" <Ctrl-c>d     Rope show documentation
-" <Ctrl-c>f     Rope find occurrences
-" <Leader>b     Set, unset breakpoint (g:pymode_breakpoint enabled)
-" [[            Jump on previous class or function (normal, visual, operator modes)
-" ]]            Jump on next class or function (normal, visual, operator modes)
-" [M            Jump on previous class or method (normal, visual, operator modes)
-" ]M            Jump on next class or method (normal, visual, operator modes)
-let g:pymode_rope = 0 "Disable rope because use jedi-vim
-
-" Documentation
-let g:pymode_doc = 1
-let g:pymode_doc_key = 'K'
-
-"Linting
-let g:pymode_lint = 1
-let g:pymode_lint_checker = "pyflakes,pep8"
-" Auto check on save
-let g:pymode_lint_write = 1
-
-" Support virtualenv
-let g:pymode_virtualenv = 1
-
-" Enable breakpoints plugin
-let g:pymode_breakpoint = 1
-let g:pymode_breakpoint_key = '<leader>b'
-
-" syntax highlighting
-let g:pymode_syntax = 1
-let g:pymode_syntax_all = 1
-
-
-" Options
-let g:pymode_options_max_line_length = 79 "Maximo de caracteres por linea
-let g:pymode_options_colorcolumn = 1 " Enable colorcolum display at max_line_lenght
-let g:pymode_python = 'python3' "Version python two opt 'python' or 'python3'
-
-" Don't autofold code
-let g:pymode_folding = 0
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -406,6 +369,7 @@ set autochdir
 set tabstop=4
 set shiftwidth=4
 set expandtab
+set softtabstop=4
 
 " more subtle popup colors 
 if has ('gui_running')
