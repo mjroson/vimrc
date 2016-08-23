@@ -23,6 +23,8 @@ Bundle 'FuzzyFinder'
 " The Most Recently Used (MRU) plugin provides an easy access to a list of recently opened/edited files in Vim
 Bundle 'vim-scripts/mru.vim'
 
+" Plugin to properly fold
+Plugin 'tmhedberg/SimpylFold'
 
 " plugin will modify python's sys.path and the $PATH environment (Folder default search ~/.virtualenvs/)
 Bundle 'jmcantrell/vim-virtualenv'
@@ -34,7 +36,7 @@ Bundle 'davidhalter/jedi-vim'
 
 " plugin that runs the currently open file through Flake8, a static syntax and style checker for Python source code. It supersedes both vim-pyflakes and vim-pep8.
 " Flake8 is a wrapper around PyFlakes (static syntax checker), PEP8 (style checker) and Ned's MacCabe script (complexity checker).
-Bundle 'nview/vim-flake8'
+Bundle 'nvie/vim-flake8'
 
 
 " fugitive.vim may very well be the best Git wrapper of all time
@@ -75,6 +77,19 @@ Plugin 'mattn/emmet-vim'
 " Vim css and less syntax
 Bundle 'groenewege/vim-less'
 
+" Track the engine.
+Plugin 'SirVer/ultisnips'
+
+" Snippets are separated from the engine. Add this if you want them:
+Plugin 'honza/vim-snippets'
+
+" Plugin to motion plugin that jumps to any location specified by two
+" characters
+Plugin 'justinmk/vim-sneak'
+"Bundle 'honza/vim-snippets'
+" Plugin to create python scripts for vim
+" Plugin 'amoffat/snake'
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
@@ -89,6 +104,7 @@ syntax on                           " syntax highlighing
 " => color-scheme
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+"color herald
 color Monokai
 "set guifont=Monaco:h12
 set guioptions-=T " Removes top toolbar
@@ -209,6 +225,7 @@ au BufEnter,Bufread *.mkd,*.md,*.mdown,*.markdown set tw=0
 " Folding
 " auto save folding : http://princ3.wordpress.com/2007/01/26/automaticaly-save-foldings-in-vim/
 "set viewoptions=folds
+set foldcolumn=2
 "au BufWinLeave * silent! mkview
 "au BufWinEnter * silent! loadview
 
@@ -366,15 +383,40 @@ nmap <leader>l :set list!<CR>
 set autochdir
 
 " I'm prefer spaces to tabs
-set tabstop=4
-set shiftwidth=4
-set expandtab
+" set tabstop=4
+"set shiftwidth=4
+" set expandtab
+" set softtabstop=4
+"set autoindent
+
+set expandtab        " introduce espacios al pulsar tab
+autocmd BufRead *.py set textwidth=80    " rompe las líneas al superar los 80 caracteres
+set tabstop=4        " usa 4 espacios al presionar tab
 set softtabstop=4
+set shiftwidth=4     " numero de espacios a usar para autoindentacion
+set autoindent        " Respetar automáticamente el sangrado de la línea precedente
+
+
 
 " more subtle popup colors 
 if has ('gui_running')
     highlight Pmenu guibg=#66668a gui=bold    
 endif
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => django vim Plugins
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set filetype=htmldjango         " coloreado de sintaxis en las templates de django
+
+" Trigger configuration. Do not use <tab> if you use
+" https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -395,3 +437,21 @@ let g:user_emmet_leader_key= '<C-Z>'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nnoremap <Leader>m :w <BAR> !lessc % > %:t:r.css<CR><space>
 
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Airline 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" let g:airline_detect_paste=1
+let g:airline_theme='bubblegum'
+let g:airline#extensions#tabline#enabled = 1
+
+let g:airline_powerline_fonts = 1
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => SimplyFold
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:SimpylFold_docstring_preview = 1
+
+autocmd BufWinEnter *.py setlocal foldexpr=SimpylFold(v:lnum) foldmethod=expr
+autocmd BufWinLeave *.py setlocal foldexpr< foldmethod<

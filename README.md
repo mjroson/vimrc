@@ -6,9 +6,16 @@ ON LINUX MINT V 17.1  KDE
       sudo rm -rf /etc/vim
     
     
+    Installs ṕackages requirements:
 
     # Lib dependence to install vim
       sudo apt-get install libghc-vty-dev
+
+    # Added Support to tagbar Pluggin to vim
+      sudo apt-get install exuberant-ctags
+
+    # Added support to flake8
+      sudo pip3 install flake8
 
     # Downloaded and install vim with support python3
       cd Downloads/
@@ -22,10 +29,12 @@ ON LINUX MINT V 17.1  KDE
       cd ~
       git clone git@github.com:mjroson/vimrc.git ~/.my_vimrc
       ln -s ~/.my_vimrc/.vimrc ~/.vimrc
-	    ln -s ~/.my_vimrc/.vim/ ~/.vim/
+	    
+      git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
     
     # When first open vim run:
       :PluginInstall
 
-    # Added Support to tagbar Pluggin to vim
-      sudo apt-get install exuberant-ctags
+
+    
+    
