@@ -56,7 +56,9 @@ Bundle 'majutsushi/tagbar'
 
 
 " Lean & mean status/tabline for vim that's light as air.
-Bundle 'bling/vim-airline'
+" Bundle 'bling/vim-airline'
+Bundle 'vim-airline/vim-airline'
+Bundle 'vim-airline/vim-airline-themes'
 
 
 " Color Themes
@@ -75,7 +77,7 @@ Bundle 'scrooloose/nerdcommenter'
 Plugin 'mattn/emmet-vim'
 
 " Vim css and less syntax
-Bundle 'groenewege/vim-less'
+"Bundle 'groenewege/vim-less'
 
 " Track the engine.
 Plugin 'SirVer/ultisnips'
@@ -90,6 +92,19 @@ Plugin 'justinmk/vim-sneak'
 " Plugin to create python scripts for vim
 " Plugin 'amoffat/snake'
 
+
+" Plugin for TypeScript (Angular 2)
+Plugin 'leafgarland/typescript-vim'
+
+" Highlight html on string
+Plugin 'Quramy/vim-js-pretty-template'
+
+"asynchronous execution. 
+Plugin 'Shougo/vimproc.vim'
+
+" Autocomplete based on jedi
+" For support TypeScript need install: npm install -g typescript
+Plugin 'valloric/YouCompleteMe'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
@@ -426,7 +441,7 @@ let g:user_emmet_mode='a'
 
 "Enable just for html/css
 let g:user_emmet_install_global = 0
-autocmd FileType html,htmldjango,css EmmetInstall
+autocmd FileType html,ts,htmldjango,css EmmetInstall
 
 "To remap the default <C-Y> leader:
 let g:user_emmet_leader_key= '<C-Z>'
@@ -435,13 +450,13 @@ let g:user_emmet_leader_key= '<C-Z>'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => vim-less Plugins
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nnoremap <Leader>m :w <BAR> !lessc % > %:t:r.css<CR><space>
+"nnoremap <Leader>m :w <BAR> !lessc % > %:t:r.css<CR><space>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Airline 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" let g:airline_detect_paste=1
+let g:airline_detect_paste=1
 let g:airline_theme='bubblegum'
 let g:airline#extensions#tabline#enabled = 1
 
@@ -455,3 +470,26 @@ let g:SimpylFold_docstring_preview = 1
 
 autocmd BufWinEnter *.py setlocal foldexpr=SimpylFold(v:lnum) foldmethod=expr
 autocmd BufWinLeave *.py setlocal foldexpr< foldmethod<
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Config TypeScript
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:typescript_compiler_binary = 'tsc'
+let g:typescript_compiler_options = ''
+autocmd QuickFixCmdPost [^l]* nested cwindow
+autocmd QuickFixCmdPost    l* nested lwindow
+
+" Config plugin js-pretty-template to highlight html on string for typescript
+" file
+autocmd FileType typescript JsPreTmpl html
+autocmd FileType typescript syn clear foldBraces
+
+" Syntaxis checker to ts
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+"let g:syntastic_check_on_open = 1
+"let g:syntastic_check_on_wq = 0
+"let g:tsuquyomi_disable_quickfix = 1
+"let g:syntastic_typescript_checkers = ['tsuquyomi'] 
+"let g:ycm_server_python_interpreter = '/usr/bin/python3'
